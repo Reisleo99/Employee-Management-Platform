@@ -1,10 +1,10 @@
 -- Department
-INSERT INTO department (name) VALUES ('Engineering'), ('Sales'), ('HR');
+INSERT INTO department (name) VALUES ('Engineering'), ('Manager'), ('HR');
 
 -- Role
 INSERT INTO role (title, salary, department_id) VALUES 
 ('Engineer', 100000, 1), 
-('Sales Manager', 80000, 2), 
+('Manager', 80000, 2), 
 ('HR Specialist', 70000, 3);
 
 -- Employee
