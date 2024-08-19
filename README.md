@@ -22,7 +22,7 @@ To start the application, user Open the file in Integrated Terminal, Log in in P
 * Name - Leonardo Reis
 * Github - [Reisleo99](https://github.com/Reisleo99)
 ## Walkthrough Video
-
+https://drive.google.com/file/d/1LxPy5Hq5kom4R62VcMG0jREJ98x-S05K/view?usp=drive_link
 ## License
 
 Licensed under the MIT license.
