@@ -2,10 +2,10 @@ import inquirer from 'inquirer';
 import { getAllDepartments, addDepartment } from './services/departmentService';
 import { getAllRoles, addRole } from './services/roleService';
 import { getAllEmployees, addEmployee, updateEmployeeRole } from './services/employeeService';
-import { connectToDb } from './connection';
+import { pool } from './connection';
 
 const main = async () => {
-    await connectToDb();
+    const client = await pool.connect();
     const answers = await inquirer.prompt({
         type: 'list',
         name: 'action',
@@ -24,21 +24,25 @@ const main = async () => {
 
     switch (answers.action) {
         case 'View All Departments':
+            console.clear();
             const departments = await getAllDepartments();
             console.table(departments);
             break;
 
         case 'View All Roles':
+            console.clear();
             const roles = await getAllRoles();
             console.table(roles);
             break;
 
         case 'View All Employees':
+            console.clear();
             const employees = await getAllEmployees();
             console.table(employees);
             break;
 
         case 'Add Department':
+            console.clear();
             const { name } = await inquirer.prompt({
                 type: 'input',
                 name: 'name',
@@ -49,6 +53,7 @@ const main = async () => {
             break;
 
         case 'Add Role':
+            console.clear();
             const { title, salary, departmentId } = await inquirer.prompt([
                 { type: 'input', name: 'title', message: 'Enter the role title:' },
                 { type: 'input', name: 'salary', message: 'Enter the role salary:' },
@@ -59,6 +64,7 @@ const main = async () => {
             break;
 
         case 'Add Employee':
+            console.clear();
             const { firstName, lastName, roleId, managerId } = await inquirer.prompt([
                 { type: 'input', name: 'firstName', message: 'Enter the employee\'s first name:' },
                 { type: 'input', name: 'lastName', message: 'Enter the employee\'s last name:' },
@@ -70,6 +76,7 @@ const main = async () => {
             break;
 
         case 'Update Employee Role':
+            console.clear();
             const { employeeId, newRoleId } = await inquirer.prompt([
                 { type: 'input', name: 'employeeId', message: 'Enter the employee ID:' },
                 { type: 'input', name: 'newRoleId', message: 'Enter the new role ID:' },
@@ -82,6 +89,7 @@ const main = async () => {
             console.log('Goodbye!');
             process.exit(0);
     }
+    client.release();
     await main();
 };
 

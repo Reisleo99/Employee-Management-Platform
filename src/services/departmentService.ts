@@ -3,7 +3,6 @@ import { pool } from '../connection';
 
 export const getAllDepartments = async (): Promise<Department[]> => {
     const res = await pool.query('SELECT * FROM department');
-    console.log(res);
     return res.rows;
 };
 
